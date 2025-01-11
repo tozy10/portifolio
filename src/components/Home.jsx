@@ -3,7 +3,7 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <section className="h-[800px] bg-gray-800 text-white flex justify-center items-center text-center">
+    <section id="home" className="h-[800px] bg-gray-800 text-white flex justify-center items-center text-center">
       <div>
         <div className="flex justify-center mb-6">
           <img
