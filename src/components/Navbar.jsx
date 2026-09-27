@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiDownload, FiMenu, FiX } from 'react-icons/fi';
 import { profile } from '../data/profile';
 
@@ -50,7 +50,7 @@ const Navbar = () => {
   }, []);
 
   // Slide the highlight pill behind the active link.
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = linkRefs.current[active];
     setIndicator(el ? { left: el.offsetLeft, width: el.offsetWidth, opacity: 1 } : (prev) => ({ ...prev, opacity: 0 }));
   }, [active]);

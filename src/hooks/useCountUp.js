@@ -2,17 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import prefersReducedMotion from './prefersReducedMotion';
 
 // Counts from 0 to `target` the first time the element scrolls into view.
+// Starts at `target` so the pre-rendered HTML shows the real number.
 export default function useCountUp(target, duration = 1400) {
   const ref = useRef(null);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (prefersReducedMotion()) {
-      setValue(target);
-      return;
-    }
+    if (prefersReducedMotion()) return;
+    setValue(0);
 
     let frame;
     const observer = new IntersectionObserver(([entry]) => {

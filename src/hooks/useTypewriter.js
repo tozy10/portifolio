@@ -3,10 +3,13 @@ import prefersReducedMotion from './prefersReducedMotion';
 
 // Types each word, holds, deletes it, then moves on to the next one.
 export default function useTypewriter(words, { typeMs = 75, deleteMs = 40, holdMs = 1800 } = {}) {
-  const [text, setText] = useState(() => (prefersReducedMotion() ? words[0] : ''));
+  const [text, setText] = useState('');
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    if (prefersReducedMotion()) {
+      setText(words[0]);
+      return;
+    }
 
     let word = 0;
     let length = 0;
