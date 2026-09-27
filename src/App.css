@@ -1,3 +1,195 @@
 html {
   scroll-behavior: smooth;
 }
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animated background */
+.bg-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: -56px;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 30%, transparent 80%);
+  animation: grid-drift 30s linear infinite;
+}
+
+.bg-blob {
+  position: absolute;
+  width: 38rem;
+  height: 38rem;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.16;
+  animation: blob-float 26s ease-in-out infinite alternate;
+}
+
+.bg-blob-1 { top: -12rem; left: -10rem; background: #5fd0b3; }
+.bg-blob-2 { top: 20%; right: -14rem; background: #818cf8; animation-delay: -8s; }
+.bg-blob-3 { bottom: -16rem; left: 30%; background: #2dd4bf; opacity: 0.08; animation-delay: -16s; }
+
+@keyframes grid-drift {
+  to { transform: translate(28px, 28px); }
+}
+
+@keyframes blob-float {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6rem, 4rem) scale(1.1); }
+  100% { transform: translate(-4rem, 6rem) scale(0.95); }
+}
+
+/* Spotlight card */
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: transform 300ms ease, border-color 300ms ease;
+}
+
+.spotlight-card::before,
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.spotlight-card::before {
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(95, 208, 179, 0.09), transparent 45%);
+}
+
+.spotlight-card::after {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(300px circle at var(--x, 50%) var(--y, 50%), rgba(95, 208, 179, 0.55), transparent 45%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+@media (hover: hover) {
+  .spotlight-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .spotlight-card:hover::before,
+  .spotlight-card:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Typing caret */
+.caret {
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Rotating gradient border */
+.gradient-border {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  padding: 1px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(from 0deg, transparent 0 60%, rgba(95, 208, 179, 0.8) 75%, rgba(129, 140, 248, 0.7) 85%, transparent 100%);
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pulsing status dot */
+.pulse-dot {
+  position: relative;
+}
+
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: inherit;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Skill icons take their brand colour on hover */
+.skill-chip svg {
+  color: rgb(148 163 184);
+  transition: color 200ms ease;
+}
+
+.skill-chip:hover svg {
+  color: var(--brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .bg-grid,
+  .bg-blob,
+  .gradient-border::before,
+  .pulse-dot::after,
+  .caret {
+    animation: none;
+  }
+}

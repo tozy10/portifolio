@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ink text-slate-300 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-slate-50;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.03] border border-white/[0.08] backdrop-blur-md;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-ink
+      shadow-[0_0_32px_-10px_rgba(95,208,179,0.7)] transition hover:bg-accent-soft hover:-translate-y-0.5;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3
+      font-medium text-slate-100 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.08] hover:-translate-y-0.5;
+  }
+
+  .icon-btn {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]
+      text-slate-300 transition hover:border-accent/50 hover:text-accent hover:-translate-y-0.5;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-sm text-slate-300;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-slate-50 via-slate-100 to-accent-soft bg-clip-text text-transparent;
+  }
+}
