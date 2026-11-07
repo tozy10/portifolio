@@ -1,5 +1,6 @@
 import Background from '../components/ui/Background';
 import Navbar from '../components/Navbar';
+import Taskbar from '../components/Taskbar';
 import Home from '../components/Home';
 import Stats from '../components/Stats';
 import About from '../components/About';
@@ -28,6 +29,7 @@ function HomePage() {
         <Contact />
       </main>
       <Footer />
+      <Taskbar />
     </>
   )
 }

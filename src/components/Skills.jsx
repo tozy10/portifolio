@@ -23,7 +23,7 @@ const skillIcons = {
   HTML: [SiHtml5, '#e34f26'],
   CSS: [SiCss3, '#3c9ce0'],
   React: [SiReact, '#61dafb'],
-  'Next.js': [SiNextdotjs, '#ffffff'],
+  'Next.js': [SiNextdotjs, '#000000'],
   WordPress: [SiWordpress, '#5b9bd5'],
   SQL: [FiDatabase, '#5fd0b3'],
   Excel: [FaFileExcel, '#21a366'],
@@ -54,20 +54,20 @@ const Skills = () => {
           return (
             <SpotlightCard key={category.group} className="p-7">
               <div className="flex items-center justify-between">
-                <h3 className="flex items-center gap-3 font-display text-lg font-semibold text-slate-50">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                <h3 className="flex items-center gap-3 font-display text-lg font-semibold text-slate-900">
+                  <span className="bevel-out flex h-10 w-10 items-center justify-center bg-face text-accent">
                     <GroupIcon size={18} />
                   </span>
                   {category.group}
                 </h3>
-                <span className="font-mono text-xs text-slate-500">{category.items.length} skills</span>
+                <span className="font-mono text-xs text-slate-700">{category.items.length} skills</span>
               </div>
 
               <ul className="mt-6 flex flex-wrap gap-2">
                 {category.items.map((item) => {
                   const [Icon, brand] = skillIcons[item] ?? [FiCode, '#5fd0b3'];
                   return (
-                    <li key={item} className="skill-chip chip py-1.5 hover:border-white/20 transition-colors" style={{ '--brand': brand }}>
+                    <li key={item} className="skill-chip chip py-1.5" style={{ '--brand': brand }}>
                       <Icon size={15} />
                       {item}
                     </li>

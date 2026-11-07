@@ -13,12 +13,12 @@ const Certificates = () => {
           const Icon = cert.issuer === 'Cisco' ? SiCisco : FaGraduationCap;
           return (
             <SpotlightCard key={cert.name} as="li" className="flex items-start gap-4 p-6">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/[0.05] text-slate-300">
+              <span className="bevel-out flex h-12 w-12 shrink-0 items-center justify-center bg-face text-accent">
                 <Icon size={cert.issuer === 'Cisco' ? 26 : 20} />
               </span>
               <div>
-                <p className="font-medium leading-snug text-slate-100">{cert.name}</p>
-                <p className="mt-1 font-mono text-xs text-slate-500">{cert.issuer ?? 'Professional certificate'}</p>
+                <p className="font-medium leading-snug text-slate-900">{cert.name}</p>
+                <p className="mt-1 font-mono text-xs text-slate-700">{cert.issuer ?? 'Professional certificate'}</p>
               </div>
             </SpotlightCard>
           );

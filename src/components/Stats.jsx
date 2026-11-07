@@ -12,7 +12,7 @@ const Stat = ({ value, suffix = '', text, label }) => {
       <p ref={ref} className="font-display text-4xl md:text-5xl font-bold text-gradient">
         {text ?? `${count}${suffix}`}
       </p>
-      <p className="mt-2 text-sm text-slate-400">{label}</p>
+      <p className="mt-2 text-sm text-slate-700">{label}</p>
     </SpotlightCard>
   );
 };

@@ -8,10 +8,10 @@ const Section = ({ id, eyebrow, title, subtitle, children }) => {
   return (
     <section id={id} className="px-6 py-20 md:py-28">
       <div ref={ref} className="reveal max-w-6xl mx-auto">
-        <header className="mb-12 md:mb-14">
-          <p className="font-mono text-sm text-accent">{`// ${eyebrow}`}</p>
-          <h2 className="mt-3 font-display text-3xl md:text-5xl font-bold tracking-tight text-slate-50">{title}</h2>
-          {subtitle && <p className="mt-4 max-w-2xl text-base md:text-lg text-slate-400">{subtitle}</p>}
+        <header className="glass mb-10 px-5 py-4 md:mb-14 md:px-7 md:py-5">
+          <p className="font-mono text-xs uppercase tracking-wider text-accent md:text-sm">{`// ${eyebrow}`}</p>
+          <h2 className="mt-2 font-display text-2xl md:text-4xl font-bold tracking-tight text-slate-900">{title}</h2>
+          {subtitle && <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700 md:text-base">{subtitle}</p>}
         </header>
         {children}
       </div>

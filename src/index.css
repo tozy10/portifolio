@@ -3,40 +3,131 @@
 @tailwind utilities;
 
 @layer base {
+  /* Classic Windows 95/98 chrome is square — flatten every rounded corner site-wide. */
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+
   body {
-    @apply bg-ink text-slate-300 font-sans antialiased;
+    @apply bg-desktop text-slate-800 font-sans antialiased;
+    background-image: radial-gradient(circle at 50% 0%, #0a9a9a 0%, #008080 45%, #006666 100%);
+    background-attachment: fixed;
   }
 
   ::selection {
-    @apply bg-accent/30 text-slate-50;
+    @apply bg-accent text-white;
+  }
+
+  /* Flat, chunky, two-tone scrollbar reminiscent of the classic Windows scrollbar. */
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #dfdfdf;
+    box-shadow: inset 1px 1px 0 #808080;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    box-shadow:
+      inset 1px 1px 0 #ffffff,
+      inset -1px -1px 0 #404040;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: #c0c0c0;
   }
 }
 
 @layer components {
+  /* Raised "outset" bevel — the default look for buttons, panels and windows. */
+  .bevel-out {
+    box-shadow:
+      inset 1px 1px 0 #ffffff,
+      inset -1px -1px 0 #404040,
+      inset 2px 2px 0 #dfdfdf,
+      inset -2px -2px 0 #808080;
+  }
+
+  /* Sunken "inset" bevel — fields, pressed buttons, read-only tags. */
+  .bevel-in {
+    box-shadow:
+      inset 1px 1px 0 #404040,
+      inset -1px -1px 0 #ffffff,
+      inset 2px 2px 0 #808080,
+      inset -2px -2px 0 #dfdfdf;
+  }
+
+  /* Generic beveled panel: cards, badges, the mobile Start menu, etc. */
   .glass {
-    @apply bg-white/[0.03] border border-white/[0.08] backdrop-blur-md;
+    @apply bevel-out bg-face text-slate-900;
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-ink
-      shadow-[0_0_32px_-10px_rgba(95,208,179,0.7)] transition hover:bg-accent-soft hover:-translate-y-0.5;
+    @apply inline-flex items-center gap-2 bg-face px-5 py-2.5 font-semibold text-slate-900
+      bevel-out transition active:translate-y-px;
+    outline: 1px solid #000000;
+    outline-offset: -3px;
+  }
+
+  .btn-primary:active {
+    @apply bevel-in;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3
-      font-medium text-slate-100 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.08] hover:-translate-y-0.5;
+    @apply inline-flex items-center gap-2 bg-face px-5 py-2.5
+      font-medium text-slate-900 bevel-out transition active:translate-y-px;
+  }
+
+  .btn-ghost:active {
+    @apply bevel-in;
   }
 
   .icon-btn {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]
-      text-slate-300 transition hover:border-accent/50 hover:text-accent hover:-translate-y-0.5;
+    @apply inline-flex h-10 w-10 items-center justify-center bg-face
+      text-slate-800 bevel-out transition hover:text-accent active:translate-y-px;
   }
 
+  .icon-btn:active {
+    @apply bevel-in;
+  }
+
+  /* Sunken read-only tag/chip — client names, tech tags, skills. */
   .chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-sm text-slate-300;
+    @apply inline-flex items-center gap-2 bg-white px-3 py-1 text-sm text-slate-800 bevel-in;
   }
 
+  /* Headings render as plain, high-contrast ink — no gradients in this theme. */
   .text-gradient {
-    @apply bg-gradient-to-r from-slate-50 via-slate-100 to-accent-soft bg-clip-text text-transparent;
+    @apply text-slate-900;
+  }
+
+  /* Titlebar gradient + the tiny _ / □ / × control squares shared by every window. */
+  .win-titlebar {
+    @apply flex items-center justify-between gap-2 px-1.5 py-1 text-white;
+    background: linear-gradient(90deg, #000080, #1084d0);
+  }
+
+  .win-ctrl {
+    @apply inline-flex h-[18px] w-5 shrink-0 items-center justify-center bg-face
+      text-[11px] font-bold leading-none text-slate-900 bevel-out;
+  }
+
+  .win-ctrl:active {
+    @apply bevel-in;
+  }
+
+  /* Sunken field, e.g. the address bar / email display. */
+  .field-in {
+    @apply bg-white bevel-in;
+  }
+
+  /* Legible white "desktop icon label" text for the hero, sitting directly on the teal desktop. */
+  .text-shadow-win {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.55);
   }
 }

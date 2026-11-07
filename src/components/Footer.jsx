@@ -4,16 +4,16 @@ import { profile } from '../data/profile';
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/[0.06] px-6 py-10">
-      <div className="max-w-6xl mx-auto flex flex-col items-center justify-between gap-6 md:flex-row">
-        <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-accent/30 to-glow/30 border border-white/10 font-display text-sm font-bold text-slate-50">
+    <footer className="px-6 pt-10 pb-20">
+      <div className="field-in max-w-6xl mx-auto flex flex-col items-center justify-between gap-3 px-4 py-2.5 text-sm text-slate-700 md:flex-row">
+        <div className="flex items-center gap-2">
+          <span className="bevel-out flex h-7 w-7 items-center justify-center bg-face font-display text-xs font-bold text-slate-900">
             ET
           </span>
-          <p className="text-sm text-slate-500">© {new Date().getFullYear()} {profile.name}</p>
+          <p>© {new Date().getFullYear()} {profile.name}. Ready.</p>
         </div>
-        <p className="font-mono text-xs text-slate-600">Designed &amp; built with React + Tailwind CSS</p>
-        <div className="flex gap-4 text-slate-500">
+        <p className="font-mono text-xs text-slate-600">Built with React + Tailwind CSS</p>
+        <div className="flex gap-3">
           <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-accent transition-colors">
             <FaGithub size={18} />
           </a>
