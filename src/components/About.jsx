@@ -1,5 +1,4 @@
 // src/components/About.jsx
-import PropTypes from 'prop-types';
 import { FiBriefcase, FiCheckCircle } from 'react-icons/fi';
 import Section from './Section';
 import SpotlightCard from './ui/SpotlightCard';
@@ -8,54 +7,64 @@ import { about, aboutCode, experience } from '../data/profile';
 
 const currentJob = experience[0];
 
-const JsonValue = ({ value }) => {
-  if (Array.isArray(value)) {
-    return (
-      <>
-        [
-        {value.map((item, i) => (
-          <span key={item}>
-            <span className="text-emerald-700">&quot;{item}&quot;</span>
-            {i < value.length - 1 && ', '}
-          </span>
-        ))}
-        ]
-      </>
-    );
-  }
-  return <span className="text-emerald-700">&quot;{value}&quot;</span>;
-};
-
-JsonValue.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
-};
-
-const CodeCard = () => {
-  const entries = Object.entries(aboutCode);
-  const lines = [
-    <span key="open">{'{'}</span>,
-    ...entries.map(([key, value], i) => (
-      <span key={key}>
-        {'  '}
-        <span className="text-accent">&quot;{key}&quot;</span>: <JsonValue value={value} />
-        {i < entries.length - 1 && ','}
-      </span>
-    )),
-    <span key="close">{'}'}</span>,
+// A classic Windows "Properties" dialog: a tab strip over a flat info page.
+const PropertiesCard = () => {
+  const facts = [
+    ['Degree', aboutCode.degree],
+    ['Classification', aboutCode.classification],
+    ['Award', aboutCode.award],
   ];
 
   return (
     <Win95Window
-      title="about.json - Notepad"
+      title={`${aboutCode.name} - Properties`}
       className="md:col-span-2 md:row-span-2"
-      bodyClassName="bg-white overflow-x-auto p-5 font-mono text-[13px] leading-7 text-slate-800"
+      bodyClassName="bg-face p-3"
     >
-      {lines.map((line, i) => (
-        <div key={i} className="flex">
-          <span className="w-8 shrink-0 select-none text-right pr-4 text-slate-500">{i + 1}</span>
-          <code className="whitespace-pre-wrap pl-[4ch] -indent-[4ch]">{line}</code>
+      <div className="flex gap-1 px-1">
+        <span className="bevel-out relative z-10 -mb-0.5 bg-face px-4 py-1.5 text-sm font-semibold text-slate-900">
+          General
+        </span>
+      </div>
+
+      <div className="bevel-out flex-1 bg-face p-5">
+        <div className="flex flex-col items-center gap-3 border-b border-dashed border-face-dark/50 pb-5 text-center sm:flex-row sm:text-left">
+          <span className="bevel-out flex h-16 w-16 shrink-0 items-center justify-center bg-face text-xl font-bold text-accent">
+            ET
+          </span>
+          <div>
+            <p className="font-display text-lg font-semibold text-slate-900">{aboutCode.name}</p>
+            <p className="text-sm text-slate-700">{currentJob.role} · {currentJob.company}</p>
+          </div>
         </div>
-      ))}
+
+        <dl className="mt-5 space-y-2.5 text-sm">
+          {facts.map(([label, value]) => (
+            <div key={label} className="flex items-baseline justify-between gap-4 border-b border-dashed border-face-dark/40 pb-2">
+              <dt className="text-slate-700">{label}</dt>
+              <dd className="text-right font-medium text-slate-900">{value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className="mt-5">
+          <p className="text-xs uppercase tracking-wider text-slate-700">Focus</p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {aboutCode.focus.map((item) => (
+              <li key={item} className="chip text-xs">{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-4">
+          <p className="text-xs uppercase tracking-wider text-slate-700">Stack</p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {aboutCode.stack.map((item) => (
+              <li key={item} className="chip text-xs">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </Win95Window>
   );
 };
@@ -77,7 +86,7 @@ const About = () => {
           </div>
         </SpotlightCard>
 
-        <CodeCard />
+        <PropertiesCard />
 
         <SpotlightCard className="md:col-span-3 grid gap-6 p-7 sm:grid-cols-2">
           <div>
